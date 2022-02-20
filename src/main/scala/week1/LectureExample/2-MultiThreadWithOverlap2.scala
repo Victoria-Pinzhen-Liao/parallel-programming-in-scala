@@ -1,11 +1,9 @@
 package week1.LectureExample
 
-object SyncBlockUidExample extends App {
-  val x = new AnyRef {}
+object MultiThreadWithOverlap2 extends App {
   var uidCount = 0L
 
-  def startThread()
-  = {
+  def startThread() = {
     val t = new Thread {
       override def run(): Unit = {
         val uids = for (i <- 1 to 10) yield getUniqueId()
@@ -16,7 +14,7 @@ object SyncBlockUidExample extends App {
     t
   }
 
-  def getUniqueId(): Long = x.synchronized {
+  def getUniqueId(): Long = {
     uidCount = uidCount + 1
     uidCount
   }

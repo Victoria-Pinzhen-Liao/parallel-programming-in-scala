@@ -1,6 +1,7 @@
 package week1.LectureExample
 
-object UidExample extends App {
+object SynchronizeExample extends App {
+  val x = new AnyRef {}
   var uidCount = 0L
 
   def startThread()
@@ -15,7 +16,7 @@ object UidExample extends App {
     t
   }
 
-  def getUniqueId(): Long = {
+  def getUniqueId(): Long = x.synchronized {
     uidCount = uidCount + 1
     uidCount
   }
