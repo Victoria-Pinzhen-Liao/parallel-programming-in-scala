@@ -1,15 +1,11 @@
 # parallel-programming
 
-This is the code for coursera online course [Parallel programming](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from 
+This is the code and lecture notes for coursera online course [Parallel programming](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from 
 École Polytechnique Fédérale de Lausanne
 
-I wrote a blog for this course as well, see https://github.com/Victoria-Pinzhen-Liao/blog_parallel-programming
-
-
-#  Parallel programming
-
-:octocat: All of the code in this blog can be found on [GitHub](https://github.com/Victoria-Pinzhen-Liao/parallel-programming)
-
+ 
+ 
+ 
 ----
 
 Paralleled programming is becoming more and more critical. Almost every desktop computer, laptop, or handheld device is equipped with multi-core processors and capable of executing computations in parallel. Therefore, it is more important than ever to harness these resources.  
