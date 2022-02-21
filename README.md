@@ -1,6 +1,8 @@
+
 #  Parallel programming
 
 :octocat: GitHub: [repo link](https://github.com/Victoria-Pinzhen-Liao/parallel-programming)
+
 :page_facing_up:  blog link: https://purrgramming.life/cs/os/parallel
 
 This is the code and lecture notes for coursera online course [Parallel programming](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from École Polytechnique Fédérale de Lausanne
@@ -552,6 +554,17 @@ Process finished with exit code 0
  ```
 
  
+## Designing Computations in Parallel
+
+### Basic Parallel Construct 
+
+Given expressions `e1` and `e2`, compute them in parallel and return the pair of results 
+
+```scala
+parallel(e1, e2)
+```
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645484042088.png)
+
 
 ------------
 
