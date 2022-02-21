@@ -1,7 +1,7 @@
 package week1
 
 package object LectureExample {
-  class HelloThreadA extends Thread {
+  class HelloWorldA extends Thread {
     override def run(): Unit = {
       println("A1 Hello world!")
       println("A2 Hello world!")
@@ -9,7 +9,7 @@ package object LectureExample {
     }
   }
 
-  class HelloThreadB extends Thread {
+  class HelloWorldB extends Thread {
     override def run(): Unit = {
       println("B1 Hello world!")
       println("B2 Hello world!")

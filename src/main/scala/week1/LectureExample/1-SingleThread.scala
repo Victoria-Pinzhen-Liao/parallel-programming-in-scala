@@ -1,13 +1,7 @@
 package week1.LectureExample
 
-class HelloThread extends Thread {
-  override def run(): Unit = {
-    println("Hello world!")
-  }
-}
-
 object SingleThread extends App {
-  val t = new HelloThreadA
+  val t = new HelloWorldA
   t.start()
   t.join()
 }

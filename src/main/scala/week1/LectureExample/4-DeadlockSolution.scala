@@ -1,9 +1,16 @@
 package week1.LectureExample
 
-// Program will sometimes terminate.
+import week1.LectureExample.UidGenerator.getUniqueId
 
-class Account(var balance: Int = 0) {
+class DeadlockFreeAccount(var balance: Int = 0) {
+  val uid = getUniqueId
+
   def sendMoney(receiver: DeadlockFreeAccount, n: Int) = {
+    if (this.uid < receiver.uid) this.lockAndSendMoney(receiver, n)
+    else receiver.lockAndSendMoney(this, -n)
+  }
+
+  private def lockAndSendMoney(receiver: DeadlockFreeAccount, n: Int) = {
     this.synchronized {
       receiver.synchronized {
         this.balance -= n
@@ -13,7 +20,17 @@ class Account(var balance: Int = 0) {
   }
 }
 
-object DeadlockExample extends App {
+object UidGenerator {
+  val x = new AnyRef {}
+  var uidCount = 0L
+
+  def getUniqueId(): Long = x.synchronized {
+    uidCount = uidCount + 1
+    uidCount
+  }
+}
+
+object DeadlockSolution extends App {
   val account1 = new DeadlockFreeAccount(2000)
   val account2 = new DeadlockFreeAccount(1000)
 
@@ -29,9 +46,9 @@ object DeadlockExample extends App {
     val t = new Thread {
       override def run(): Unit = {
         // Loop: make it easier to trigger deadlock
-        for (i <- 0 until amount) {
+        for (i <- 0 until amount)
           sender.sendMoney(receiver, 1)
-        }
+
         println(s"After transfer: sender account: ${sender.balance} , receiver " +
           s"account:${receiver.balance}")
       }

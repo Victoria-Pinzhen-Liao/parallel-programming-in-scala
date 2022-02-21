@@ -4,8 +4,7 @@ object SynchronizeExample extends App {
   val x = new AnyRef {}
   var uidCount = 0L
 
-  def startThread()
-  = {
+  def startThread() = {
     val t = new Thread {
       override def run(): Unit = {
         val uids = for (i <- 1 to 10) yield getUniqueId()
