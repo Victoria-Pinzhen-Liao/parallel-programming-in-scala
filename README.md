@@ -864,7 +864,7 @@ object ParallelPNormCalculatorWithRecursion {
   result  
   }  
   
-  // like sumSegment but parallel  
+  // like sumSegment but parallel and recursive
   def sumSegmentRecursive(a: Array[Int], p: Double, s: Int, t: Int, threshold: Int): Int = {  
   if (t - s < threshold)  
   sumSegment(a, p, s, t) // small segment: do it sequentially  
