@@ -1,7 +1,7 @@
-
 #  Parallel programming
 
 :octocat: GitHub: [repo link](https://github.com/Victoria-Pinzhen-Liao/parallel-programming)
+
 :page_facing_up:  blog link: https://purrgramming.life/cs/os/parallel
 
 This is the code and lecture notes for Coursera online course [### Parallel programming (Scala 2 version) (Week1)](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from École Polytechnique Fédérale de Lausanne (EPFL)
