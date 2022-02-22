@@ -2,14 +2,13 @@
 #  Parallel programming
 
 :octocat: GitHub: [repo link](https://github.com/Victoria-Pinzhen-Liao/parallel-programming)
-
 :page_facing_up:  blog link: https://purrgramming.life/cs/os/parallel
 
-This is the code and lecture notes for coursera online course [Parallel programming](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from École Polytechnique Fédérale de Lausanne
+This is the code and lecture notes for Coursera online course [### Parallel programming (Scala 2 version) (Week1)](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from École Polytechnique Fédérale de Lausanne (EPFL)
 
 ----
 
-Paralleled programming is becoming more and more critical. Almost every desktop computer, laptop, or handheld device is equipped with multi-core processors and capable of executing computations in parallel. Therefore, it is more important than ever to harness these resources.  
+Paralleled programming is becoming more and more critical. Almost every desktop computer, laptop, or handheld device is equipped with multi-core processors and can execute computations in parallel. Therefore, it is more important than ever to harness these resources.  
 
  
 ![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645379507402.png)
@@ -44,20 +43,32 @@ sequential computing cannot do so
 - each of which can be solved **simultaneously** 
 
 ### Assumption
-We have parallel hardware at our disposal, which can execute these computations in parallel.
+We have parallel hardware at our disposal to execute these computations in parallel.
+
+### Underneath the Hood
+
+What happens inside a system when we use parallel? 
+
+Efficient parallelism requires support from 
+-  language and libraries 
+-  virtual machine   (such as Java Virtual Machine)
+-  operating system 
+-  hardware 
 
 
-## Trivia 
-### History 
+## History 
 
 At the beginning of the 21st century, tech vendors provided multiple CPU cores on the same processor chip, each capable of executing separate instruction streams.
 
-###  Parallel Hardware
+##  Parallel Hardware
 - multi-core processors
 - symmetric multiprocessors
 - general-purpose graphics processing unit
 - field-programmable gate arrays
 - computer clusters
+
+
+
 
 ## Thread and Process
 
@@ -322,10 +333,10 @@ object SynchronizeExample extends App {
 
 ## Memory model 
 
-Memory model is a set of rules that describes how threads interact when accessing shared memory. 
-Java Memory Model – the memory model for the JVM. 
+A memory model is a set of rules that describes how threads interact when accessing shared memory. 
+`Java Memory Model` is the memory model for the JVM. 
 1. Two threads writing to separate locations in memory do not need synchronization. 
-2. A thread `X` that calls `join` on another thread `Y` is guaranteed to observe all the writes by thread `Y` after join returns.
+2. A thread `X` calls `join` on another thread `Y` is guaranteed to observe all the writes by thread `Y` after #join returns.
 
 ## Deadlock 
 
@@ -340,9 +351,9 @@ i.e. each thread is waiting for the other thread to relinquish a lock  and wait 
 
 
 - **Mutual exclusion**: At least one resource must be held in a non-shareable mode; that is, only one process at a time can use the resource. 
-- **Hold and wait or resource holding**: a process is currently holding at least one resource and requesting additional resources which are being held by other processes.
+- **Hold and wait or resource holding**: a process currently holding at least one resource and requesting additional resources held by other processes.
 - **No preemption**: a resource can be released only voluntarily by the process holding it.
-- **Circular wait**: each process must be waiting for a resource which is being held by another process, which in turn is waiting for the first process to release the resource.  
+- **Circular wait**: each process must be waiting for a resource held by another process, which in turn is waiting for the first process to release the resource.  
 
 ![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645463425065.png)
 
@@ -350,7 +361,7 @@ i.e. each thread is waiting for the other thread to relinquish a lock  and wait 
 ### Deadlock  Code Example
 
 
-The amount of money of a bank account is locked (synchronized) when transferring money to make sure that number is correct. If we have 2 accounts , and both trying to send money to each other, then both accounts are locked.
+The amount of money in a bank account is locked (synchronized) when transferring money to ensure that the number is correct. If we have two accounts, and both are trying to send money to each other, then both accounts are locked.
 
 Here, the two transfer threads compete for resources
 (`amount` in the `Account`), and wait for each to finish without releasing
@@ -421,7 +432,7 @@ Ostrich algorithm:
 - In this approach, it is assumed that a deadlock will never occur. 
 - Initially used by   UNIX.
 - Used when the time intervals between occurrences of deadlocks are large and the data loss incurred each time is tolerable.
-- Can be safely done if deadlocks are formally proven to never occur. 
+- Can be safely done if deadlocks are formally proven never to occur. 
 
 ####  Deadlock Prevention vs Deadlock Avoidance
 
@@ -442,7 +453,7 @@ Deadlock **avoidance** -  ensure that the system does not enter an unsafe state.
 | Mutual Exclusion | Spooling | x |
 | Hold and Wait | Request for all the resources initially | x |
 | No Preemption | Snatch all the resources | x |
-| Circular Wait | Assign priority to each resources and order resources numerically | yes|
+| Circular Wait | Assign priority to each resource and order resources numerically | yes|
 
 ##### Details 
 1. Removing the mutual exclusion condition means that no process will have exclusive access to a resource.  
@@ -451,11 +462,11 @@ Deadlock **avoidance** -  ensure that the system does not enter an unsafe state.
 	  - This proves impossible for resources that cannot be spooled. 
 	  - But even with spooled resources, the deadlock could still occur. 
 	
-2. The hold and wait or resource holding condition: These algorithms, such as serializing tokens, are known as the all-or-none algorithms.
+2. The hold and wait or resource holding condition: These algorithms, such as serializing tokens, are all-or-none algorithms.
 
-	Algorithm 1: may be removed by requiring processes to request all the resources they will need before starting up or before embarking upon a particular set of operations.
+	Algorithm 1: may be removed by requiring processes to request all the resources they will need before starting up or embarking upon a particular set of operations.
 	Not practical:
-	- This advance knowledge is frequently difficult to satisfy 
+	- This advanced knowledge is frequently difficult to satisfy 
 	- This is an inefficient use of resources. 
 
 	Algorithm 2:  require processes to request resources only when it has none; 
@@ -468,8 +479,8 @@ Deadlock **avoidance** -  ensure that the system does not enter an unsafe state.
 3. The no preemption condition: inability to enforce preemption may interfere with a priority algorithm. 
 
 Not practical:
-- A process has to be able to have a resource for a certain amount of time, or the processing outcome may be inconsistent or thrashing may occur. 
-- Preemption of a "locked out" resource generally implies a rollback, and is to be avoided since it is very costly in overhead. 
+- A process must have a resource for a certain amount of time, or the processing outcome may be inconsistent, or thrashing may occur. 
+- Preemption of a "locked out" resource generally implies a rollback and is to be avoided since it is a very costly overhead. 
 
 Algorithms 
 - lock-free
@@ -486,18 +497,18 @@ Algorithms
 
 #### Deadlock avoidance
 
-Deadlock avoidance does not impose any conditions as seen in prevention but, here each resource request is carefully analyzed to see whether it could be safely fulfilled without causing deadlock.
+Deadlock avoidance does not impose any conditions as seen in prevention, but each resource request is carefully analyzed to see whether it could be safely fulfilled without causing deadlock.
 
-Deadlock avoidance requires that the operating system be given in advance additional information concerning which resources a process will request and use during its lifetime. 
+Deadlock avoidance requires that the operating system be given additional information concerning which resources a process will request and use during its lifetime. 
 
-**Algorithm:** [Banker's algorithm](https://en.wikipedia.org/wiki/Banker%27s_algorithm): analyzes each and every request by examining that there is no possibility of deadlock occurrence in the future if the requested resource is allocated. 
+**Algorithm:** [Banker's algorithm](https://en.wikipedia.org/wiki/Banker%27s_algorithm): analyzes each request by examining that there is no possibility of deadlock occurrence in the future if the requested resource is allocated. 
 
 
-**Drawback**:   its requirement of information in advance about how resources are to be requested in the future. One of the most used deadlock avoidance algorithm is 
+**Drawback**:   its requirement of information in advance about how resources are to be requested in the future. One of the most used deadlock avoidance algorithms is 
  
  #### Deadlock Solution Code Example 
 
-For the example we used in the deadlock Code example, one approach is to always acquire resources in the same order. This assumes an ordering relationship on the resources. 
+For the example we used in the deadlock Code example, one approach is always to acquire resources in the same order. This assumes an ordering relationship on the resources. 
 
 ```scala
 package week1.LectureExample
@@ -558,19 +569,318 @@ Process finished with exit code 0
 
 ### Basic Parallel Construct 
 
-Given expressions `e1` and `e2`, compute them in parallel and return the pair of results 
+> Will have a separate blog for the implementation of Basic Parallel Construct 
+
+Given expressions `e1` and `e2`, compute them in parallel and return the pair of results. 
+
 
 ```scala
 parallel(e1, e2)
 ```
+
 ![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645484042088.png)
 
+where we can solve the subproblems in parallel
 
-------------
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645537768349.png)
 
-WIP 
 
-![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645379600842.png)
+
+### Example: p-norm
+
+ Given a vector as an array (of integers), compute its `p-norm.`
+
+Where: the function `p-norm`. A p-norm is a generalization of the notion of length from geometry.  
+
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645484469439.png)
+
+
+#### Subtask (The Main Step)
+The subtask (main step) is to compute the sum of the elements the array raised to `p`. 
+
+Let us define a slightly more general function, called sum segment.  i.e. solve sequentially the following `sumSegment` problem: given 
+- an integer array `a`, representing our vector 
+- a positive double floating-point number `p` 
+- start index of the segment as well as the end boundary, an index before which we should stop summing up -two valid indices `s <= t` into the array `a` 
+
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645536235871.png)
+
+
+The solution is just a traversal of the array that adds up the powers of elements. We use a while loop to do the traversal. The power function is a simple combination of the appropriate math library functions.
+ 
+ ```scala
+ def sumSegment(a: Array[Int], p: Double, s: Int, t: Int): Int = {  
+  var i = s  
+  var sum: Int = 0  
+  while (i < t) {  
+  sum = sum + power(a(i), p)  
+  i = i + 1  
+  }  
+  sum  
+}
+ ```
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645537003613.png)
+```scala
+def power(x: Int, p: Double): Int = math.exp(p * math.log(abs(x))).toInt
+```
+
+#### P Norm Computation
+
+```
+Q: Now that we have the sum segment function, how do we compute the p-norm?
+```
+
+We apply `sumSegment` to the entire array, from index zero to the array's length. We then raise the result to the power one over `p`. This gives us a sequential version for computing the p-norm. 
+
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645536960559.png)
+
+```scala
+def pNorm(a: Array[Int], p: Double): Int = {  
+  power(sumSegment(a, p, 0, a.size), 1 / p)  
+}
+```
+
+Full code
+
+```scala
+package week1.LectureExample  
+  
+import week1.LectureExample.PNormCalculator.pNorm  
+  
+import scala.math.abs  
+  
+object PNorm extends App {  
+  val array = Array(1, 2, 3, 4, 5, 6, 7, 8)  
+  val p = 2.5  
+  pNorm(array, p)  
+}  
+  
+object PNormCalculator {  
+  def pNorm(a: Array[Int], p: Double): Int = {  
+  val result = power(sumSegment(a, p, 0, a.size), 1 / p)  
+  println(s"The p norm of ${a.toSeq} (p = $p) is: $result")
+  result  
+  }  
+  
+  def sumSegment(a: Array[Int], p: Double, s: Int, t: Int): Int = {  
+  var i = s  
+    var sum: Int = 0  
+  while (i < t) {  
+  sum = sum + power(a(i), p)  
+  i = i + 1  
+  }  
+  sum  
+  }  
+  
+  def power(x: Int, p: Double): Int = math.exp(p * math.log(abs(x))).toInt  
+}
+```
+
+Sys output
+
+```scala
+The p norm of ArraySeq(1, 2, 3, 4, 5, 6, 7, 8) (p = 2.5) is: 12
+```
+
+#### Split P Norm Computation into 2 Calcs (Sequencial)
+
+```
+Q: How do we go from here to a parallel version?
+```
+
+Now, observe that the summation can be expressed in two parts: 
+1. sum up to some middle element `m`,
+2. sum from that middle element to the end. 
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645537600270.png)
+
+```
+Q: What is a Scala expression that corresponds to using two sums?
+```
+
+We need to invoke the sum segment twice, then add up the two intermediate sums before raising everything to the power of one over p. 
+
+```scala
+// Sequential 
+def sequentialPNormCalc(a: Array[Int], p: Double): Int = {  
+  val m = a.length / 2  
+  val (sum1, sum2) = (sumSegment(a, p, 0, m),  
+    sumSegment(a, p, m, a.length))  
+  val result = power(sum1 + sum2, 1 / p)  
+  println(s"The p norm of ${a.toSeq} is: $result")  
+  result  
+}
+```
+
+Full code:
+
+```scala
+package week1.LectureExample  
+  
+import week1.LectureExample.PNormCalculator.{power, sumSegment}  
+import week1.LectureExample.SequentialPNormCalculator._  
+  
+object SequentialPNormCalc extends App {  
+  val array = Array(1, 2, 3, 4, 5, 6, 7, 8)  
+  val p = 2.5  
+  sequentialPNormCalc(array, p)  
+}  
+  
+object SequentialPNormCalculator {  
+  def sequentialPNormCalc(a: Array[Int], p: Double): Int = {  
+  val m = a.length / 2  
+  val (sum1, sum2) = (sumSegment(a, p, 0, m),  
+      sumSegment(a, p, m, a.length))  
+  val result = power(sum1 + sum2, 1 / p)  
+  println(s"The p norm of ${a.toSeq} is: $result")  
+  result  
+  }  
+}
+```
+
+Sys output
+
+```scala
+The p norm of ArraySeq(1, 2, 3, 4, 5, 6, 7, 8) (p = 2.5) is: 12
+```
+
+#### Split P Norm Computation into 2 Calcs (Parallel)
+
+```
+Q: This is still sequential computation. How do we make it parallel?
+```
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645540072854.png)
+
+All we need to do is wrap the pair into the `parallel` construct.
+
+```scala
+// Parallel  
+def parallelPNormCalc(a: Array[Int], p: Double): Int = {  
+  val m = a.length / 2  
+  val (sum1, sum2) = parallel(sumSegment(a, p, 0, m),  
+    sumSegment(a, p, m, a.length))  
+  val result = power(sum1 + sum2, 1 / p)  
+  println(s"The p norm of ${a.toSeq} is: $result")  
+  result  
+}
+```
+
+
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645540091099.png)
+
+
+Full Code
+
+```scala
+package week1.LectureExample  
+  
+import week1.LectureExample.PNormCalculator.{power, sumSegment}  
+import week1.LectureExample.ParallelPNormCalculator.parallelPNormCalc  
+  
+object ParallelPNormCalc extends App {  
+  val array = Array(1, 2, 3, 4, 5, 6, 7, 8)  
+  val p = 2.5  
+  parallelPNormCalc(array, p)  
+}  
+  
+object ParallelPNormCalculator {  
+  // Parallel  
+  def parallelPNormCalc(a: Array[Int], p: Double): Int = {  
+  val m = a.length / 2  
+  val (sum1, sum2) = parallel(sumSegment(a, p, 0, m),  
+      sumSegment(a, p, m, a.length))  
+  val result = power(sum1 + sum2, 1 / p)  
+  println(s"The p norm of ${a.toSeq} is: $result")  
+  result  
+  }  
+}
+```
+Sys output
+
+```scala
+The p norm of ArraySeq(1, 2, 3, 4, 5, 6, 7, 8) (p = 2.5) is: 12
+```
+
+Given a platform that supports parallel execution, the computation with parallel may run up to twice as fast as the one without parallelism.
+
+The parallel version may take some time to set up parallel execution, but after that might make progress on processing array elements twice as fast as the sequential one.
+
+#### Split P Norm Computation into 4 Calcs (Parallel)
+
+```
+Q: Suppose that we have at least four parallel hardware threads. How would we process four array segments in parallel using our parallel construct?
+```
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645543544285.png)
+
+We divide the array into four segments. We can compute the sum of the first two segments in parallel and the sum of the second two segments in parallel.
+
+Finally, these two parallel computations of pairs can take place in parallel. Once we get four partial sums, we can add up these four.
+
+```scala
+ 
+  val m = a.length / 2  
+  val m1 = a.length / 4;  
+  val m2 = a.length / 2;  
+  val m3 = 3 * a.length / 4  
+  val ((sum1, sum2), (sum3, sum4)) =  
+    parallel(parallel(sumSegment(a, p, 0, m1), sumSegment(a, p, m1, m2)),  
+      parallel(sumSegment(a, p, m2, m3), sumSegment(a, p, m3, a.length)))  
+  power(sum1 + sum2 + sum3 + sum4, 1 / p)  
+
+```
+
+#### Split P Norm Computation Recursively (Parallel)
+
+```scala
+Q: Is there a recursive algorithm for an unbounded number of threads?
+```
+
+We can define `segmentRec`, which uses parallelism, to sum up, a given segment of the array. When the segment size is 1, it computes the sum sequentially. Otherwise, it divides the segment in half and invokes itself recursively on two smaller segments. 
+
+```scala
+package week1.LectureExample  
+  
+import week1.LectureExample.PNormCalculator.{power, sumSegment}  
+import week1.LectureExample.ParallelPNormCalculatorWithRecursion.pNormRecursion  
+  
+object ParallelPNormCalcWithRecursion extends App {  
+  val array = Array(1, 2, 3, 4, 5, 6, 7, 8)  
+  val p = 2.5  
+  pNormRecursion(array, p)  
+}  
+  
+object ParallelPNormCalculatorWithRecursion {  
+  
+  def pNormRecursion(a: Array[Int], p: Double): Int = {  
+  val result = power(sumSegmentRecursive(a, p, 0, a.length, 2), 1 / p)  
+  println(s"The p norm of ${a.toSeq} is: $result")  
+  result  
+  }  
+  
+  // like sumSegment but parallel  
+  def sumSegmentRecursive(a: Array[Int], p: Double, s: Int, t: Int, threshold: Int): Int = {  
+  if (t - s < threshold)  
+  sumSegment(a, p, s, t) // small segment: do it sequentially  
+  else {  
+  val m = s + (t - s) / 2  
+  val (sum1, sum2) = parallel(sumSegmentRecursive(a, p, s, m, threshold),  
+        sumSegmentRecursive(a, p, m, t, threshold))  
+  sum1 + sum2  
+  }  
+ }
+}
+```
+
+
+
+
 
 ## Reference
 
