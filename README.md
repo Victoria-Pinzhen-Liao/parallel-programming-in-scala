@@ -1,22 +1,33 @@
-#  Parallel programming
 
-:octocat: GitHub: [repo link](https://github.com/Victoria-Pinzhen-Liao/parallel-programming)
+# (1) Parallel programming
 
-:page_facing_up:  blog link: https://purrgramming.life/cs/os/parallel
 
-This is the code and lecture notes for Coursera online course [### Parallel programming (Scala 2 version) (Week1)](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from École Polytechnique Fédérale de Lausanne (EPFL)
+## About  
+
+:octocat: GitHub: All of the example code: [repo (link)](https://github.com/Victoria-Pinzhen-Liao/parallel-programming)
+
+:page_facing_up:  blog link: https://purrgramming.life/cs/os/parallel    :star:
+
+----------------
+
+
+These are my  lecture notes and the code for Coursera online course [Parallel programming (Scala 2 version) (Week1)](https://www.coursera.org/learn/scala2-parallel-programming/home/week/1) from École Polytechnique Fédérale de Lausanne (EPFL)
 
 ----
 
+
+**Why is parallel programming important to learn?**
+
 Paralleled programming is becoming more and more critical. Almost every desktop computer, laptop, or handheld device is equipped with multi-core processors and can execute computations in parallel. Therefore, it is more important than ever to harness these resources.  
+
+
+## Definition
+
 
  
 ![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645379507402.png)
 
 
-
-
-## Definition
 
 Parallel computing is a type of computation in which many calculations are performed at the **same time.** 
 
@@ -42,12 +53,12 @@ sequential computing cannot do so
 - computation can be divided into smaller subproblems
 - each of which can be solved **simultaneously** 
 
-### Assumption
-We have parallel hardware at our disposal to execute these computations in parallel.
-
+ 
 ### Underneath the Hood
 
-What happens inside a system when we use parallel? 
+```
+Q: What happens inside a system when we use parallel? 
+```
 
 Efficient parallelism requires support from 
 -  language and libraries 
@@ -56,16 +67,7 @@ Efficient parallelism requires support from
 -  hardware 
 
 
-## History 
-
-At the beginning of the 21st century, tech vendors provided multiple CPU cores on the same processor chip, each capable of executing separate instruction streams.
-
-##  Parallel Hardware
-- multi-core processors
-- symmetric multiprocessors
-- general-purpose graphics processing unit
-- field-programmable gate arrays
-- computer clusters
+ 
 
 
 
@@ -569,7 +571,6 @@ Process finished with exit code 0
 
 ### Basic Parallel Construct 
 
-> Will have a separate blog for the implementation of Basic Parallel Construct 
 
 Given expressions `e1` and `e2`, compute them in parallel and return the pair of results. 
 
@@ -584,6 +585,17 @@ where we can solve the subproblems in parallel
 
 ![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645537768349.png)
 
+-----------------------------
+
+### Head Up
+Will have a separate blog for the implementation of #parallel
+
+If you want to run the example code, you can copy the definition of #parallel from https://github.com/Victoria-Pinzhen-Liao/parallel-programming/blob/main/src/main/scala/week1/LectureExample/package.scala
+
+
+![file](https://purrgramming.life/wp-content/uploads/2022/02/image-1645623650616.png)
+
+-------------------------
 
 
 ### Example: p-norm
@@ -864,7 +876,7 @@ object ParallelPNormCalculatorWithRecursion {
   result  
   }  
   
-  // like sumSegment but parallel and recursive
+  // like sumSegment but parallel and recursive 
   def sumSegmentRecursive(a: Array[Int], p: Double, s: Int, t: Int, threshold: Int): Int = {  
   if (t - s < threshold)  
   sumSegment(a, p, s, t) // small segment: do it sequentially  
@@ -881,11 +893,3 @@ object ParallelPNormCalculatorWithRecursion {
 
 
 
-
-## Reference
-
-- (2022). Retrieved 18 January 2022, from https://www.coursera.org/learn/scala2-parallel-programming/lecture/vd3xo/course-overview  
-- GitHub - ehsanmok/scala-parallel-programming: coursera. (2022). Retrieved 18 January 2022, from https://github.com/ehsanmok/scala-parallel-programming
-- (2022). Retrieved 18 January 2022, from https://www.epfl.ch/labs/lamp/wp-content/uploads/2019/01/week01.pdf 
-- Parallel Algorithm - Introduction. (2022). Retrieved 18 January 2022, from https://www.tutorialspoint.com/parallel_algorithm/parallel_algorithm_introduction.htm
-- Thread State. (2022). Retrieved 18 February 2022, from https://www.cs.princeton.edu/courses/archive/spr96/cs333/java/tutorial/java/threads/states.html
